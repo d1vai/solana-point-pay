@@ -4,6 +4,7 @@ import BigNumber from "bignumber.js";
 import { NextApiHandler } from "next";
 import { connection } from "../core";
 import { cors, rateLimit } from "../middleware";
+import { runMiddleware } from "./middleware";
 
 interface GetResponse {
   label: string;
@@ -106,9 +107,12 @@ const index: NextApiHandler<GetResponse | PostResponse> = async (
   response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS"); // 允许的请求方法
   response.setHeader("Access-Control-Allow-Headers", "Content-Type"); // 允许的请求头
 
-  // 处理 OPTIONS 请求
+  // 运行 CORS 中间件
+  await runMiddleware(request, response, cors);
+
+  // 处理预检请求
   if (request.method === "OPTIONS") {
-    response.status(204).end(); // 直接返回204状态，表示预检请求成功
+    response.status(200).end();
     return;
   }
 
