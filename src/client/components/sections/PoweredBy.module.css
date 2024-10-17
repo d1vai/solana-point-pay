@@ -11,3 +11,37 @@
 .text {
     margin-bottom: -2px;
 }
+
+.inputContainer {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.input {
+    flex: 1; /* 输入框占据剩余空间 */
+    margin-right: 8px; /* 输入框和按钮之间的间距 */
+    padding: 10px; /* 添加内边距 */
+    border: 1px solid #ccc; /* 边框颜色 */
+    border-radius: 5px; /* 圆角 */
+    font-size: 16px; /* 字体大小 */
+    transition: border-color 0.3s; /* 边框颜色过渡效果 */
+}
+
+.input:focus {
+    border-color: #007bff; /* 聚焦时边框颜色 */
+    outline: none; /* 去掉默认的轮廓 */
+}
+
+.button {
+    padding: 5px 10px; /* 调整按钮的内边距 */
+    background-color: #007bff; /* 按钮背景色 */
+    color: white; /* 按钮文字颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 5px; /* 圆角 */
+    cursor: pointer; /* 鼠标悬停时显示手型 */
+    transition: background-color 0.3s; /* 背景色过渡效果 */
+}
+
+.button:hover {
+    background-color: #0056b3; /* 悬停时按钮背景色 */
+}
