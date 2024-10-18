@@ -35,15 +35,17 @@ export const NumPad: FC = () => {
   return (
     <div className={css.root}>
       <div className={css.text}>Enter amount in {symbol}</div>
-      <div className="flex">
-        {" "}
-        {/* 新增容器以便于布局 */}
+      <div className={css.inputContainer}>
         <input
           type="text"
           value={value}
           onChange={onInputChange}
           className={css.input} // 添加样式类
+          placeholder="0" // 添加占位符
         />
+        <button className={css.backspaceButton} onClick={onBackspace}>
+          ⌫ {/* 使用删除符号 */}
+        </button>
       </div>
     </div>
   );

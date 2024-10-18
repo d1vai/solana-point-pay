@@ -3,8 +3,8 @@ import { PublicKey, Transaction } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
 import { NextApiHandler } from "next";
 import { connection } from "../core";
-import { cors, rateLimit } from "../middleware";
-import { runMiddleware } from "./middleware";
+import { rateLimit } from "../middleware";
+import cors, { runMiddleware } from "./middleware";
 
 interface GetResponse {
   label: string;
@@ -35,6 +35,14 @@ const post: NextApiHandler<PostResponse> = async (request, response) => {
     persisted along with an unpredictable opaque ID representing the payment, and the ID be passed to the app client,
     which will include the ID in the transaction request URL. This prevents tampering with the transaction request.
     */
+  // 运行 CORS 中间件
+  await runMiddleware(request, response, cors);
+
+  // 处理预检请求
+  if (request.method === "OPTIONS") {
+    response.status(200).end();
+    return;
+  }
   const recipientField = request.query.recipient;
   if (!recipientField) throw new Error("missing recipient");
   if (typeof recipientField !== "string") throw new Error("invalid recipient");
@@ -102,11 +110,6 @@ const index: NextApiHandler<GetResponse | PostResponse> = async (
   request,
   response
 ) => {
-  // 设置 CORS 头
-  response.setHeader("Access-Control-Allow-Origin", "*"); // 允许所有域名访问
-  response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS"); // 允许的请求方法
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type"); // 允许的请求头
-
   // 运行 CORS 中间件
   await runMiddleware(request, response, cors);
 
@@ -116,7 +119,6 @@ const index: NextApiHandler<GetResponse | PostResponse> = async (
     return;
   }
 
-  await cors(request, response);
   await rateLimit(request, response);
 
   if (request.method === "GET") return get(request, response);

@@ -1,9 +1,61 @@
 .root {
+    background-color: white; /* 设置背景为白色 */
+    padding: 30px; /* 添加内边距 */
+    border-radius: 12px; /* 添加圆角 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 添加更明显的阴影效果 */
+    transition: transform 0.3s; /* 添加过渡效果 */
+}
+
+.root:hover {
+    transform: scale(1.02); /* 鼠标悬停时放大 */
 }
 
 .text {
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    font-size: 28px; /* 增大字体 */
+    font-weight: 700; /* 加粗字体 */
+    color: #000000; /* 设置字体颜色 */
+}
+
+.inputContainer {
+    display: flex; /* 使用 flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    margin-bottom: 20px; /* 添加底部间距 */
+}
+
+.input {
+    width: 100%; /* 输入框宽度占满容器 */
+    max-width: 233px; /* 最大宽度调整为原来的三分之一 */
+    padding: 10px; /* 减小内边距 */
+    font-size: 24px; /* 减小字体 */
+    border: 2px solid #007bff; /* 边框颜色 */
+    border-radius: 8px; /* 圆角 */
+    outline: none; /* 去掉默认轮廓 */
+    transition: border-color 0.3s, box-shadow 0.3s; /* 边框颜色和阴影过渡效果 */
+}
+
+.input:focus {
+    border-color: #0056b3; /* 聚焦时边框颜色 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 聚焦时阴影效果 */
+}
+
+.backspaceButton {
+    margin-left: 10px; /* 按钮与输入框之间的间距 */
+    padding: 20px; /* 按钮内边距 */
+    font-size: 36px; /* 按钮字体大小 */
+    border: none; /* 去掉边框 */
+    border-radius: 8px; /* 圆角 */
+    background-color: #f44336; /* 删除按钮背景色 */
+    color: white; /* 删除按钮文字颜色 */
+    cursor: pointer; /* 鼠标悬停时显示手型 */
+    transition: background-color 0.3s, transform 0.3s; /* 背景色和缩放过渡效果 */
+}
+
+.backspaceButton:hover {
+    background-color: #d32f2f; /* 悬停时按钮背景色 */
+    transform: scale(1.1); /* 悬停时放大 */
 }
 
 .value {
@@ -50,7 +102,6 @@
         background: var(--theme-light-numpad-button-active);
     }
 }
-
 
 :global(html.dark) .button {
     background: var(--theme-dark-numpad-button-background);
