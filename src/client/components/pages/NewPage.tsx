@@ -22,7 +22,7 @@ const NewPage: NextPage = () => {
         <NumPad />
         <GenerateButton />
       </div>
-      <PoweredBy />
+      {/* <PoweredBy /> */}
     </div>
   );
 };
